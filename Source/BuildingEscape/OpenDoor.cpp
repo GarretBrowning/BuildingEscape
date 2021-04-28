@@ -20,13 +20,8 @@ void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	UE_LOG(LogTemp, Warning, TEXT("Actor Name ---> %s"), *GetOwner()->GetName());
-	UE_LOG(LogTemp, Warning, TEXT("%s's Rotation ---> %s"), *GetOwner()->GetName(), *GetOwner()->GetActorRotation().ToString());
-	UE_LOG(LogTemp, Warning, TEXT("%s's Current Yaw Value ---> %f."),  *GetOwner()->GetName(), GetOwner()->GetActorRotation().Yaw);
-
 	CurrentRotation = GetOwner()->GetActorRotation();
-	CurrentYaw = CurrentRotation.Yaw;
-	NewYaw = CurrentYaw + 90.f;
+	TargetYaw += CurrentRotation.Yaw;
 }
 
 // Called every frame
@@ -34,8 +29,13 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
+	//Debugging Logs
+	UE_LOG(LogTemp, Warning, TEXT("Actor Name ---> %s"), *GetOwner()->GetName());
+	UE_LOG(LogTemp, Warning, TEXT("%s's Rotation ---> %s"), *GetOwner()->GetName(), *GetOwner()->GetActorRotation().ToString());
+	UE_LOG(LogTemp, Warning, TEXT("%s's Current Yaw Value ---> %f."),  *GetOwner()->GetName(), GetOwner()->GetActorRotation().Yaw);
+	
 	CurrentRotation = GetOwner()->GetActorRotation();
 	CurrentYaw = CurrentRotation.Yaw;
-	NewRotation.Yaw = FMath::Lerp(CurrentYaw, NewYaw, 0.021f);
+	NewRotation.Yaw = FMath::FInterpTo(CurrentYaw, TargetYaw, DeltaTime, 1.f);
 	GetOwner()->SetActorRotation(NewRotation);
 }
