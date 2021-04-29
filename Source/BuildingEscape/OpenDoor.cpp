@@ -1,8 +1,8 @@
 // Copyright Garret Browning 2021
 
+#include "OpenDoor.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
-#include "OpenDoor.h"
 #include "GameFramework/Actor.h"
 
 // Sets default values for this component's properties
@@ -12,7 +12,6 @@ UOpenDoor::UOpenDoor()
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 }
-
 
 // Called when the game starts
 void UOpenDoor::BeginPlay()
@@ -68,16 +67,6 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 {
 	CurrentRotation = GetOwner()->GetActorRotation();
 	CurrentYaw = CurrentRotation.Yaw;
-	NewRotation.Yaw = FMath::FInterpTo(CurrentYaw, InitialYaw, DeltaTime, DoorCloseSpeed);
+	NewRotation.Yaw = FMath::FInterpConstantTo(CurrentYaw, InitialYaw, DeltaTime, DoorCloseSpeed);
 	GetOwner()->SetActorRotation(NewRotation);
 }
-
-/*
-	Choose Magic Object to Open Door dropped inside of trigger volume.
-	Create GrabObject Component which inherits OpenDoor?
-		- Give any component that uses GrabObject isGrabbed component, and give Player Actor/Pawn grabbing permissions (pickup/drop 1 item at a time)
-		- isGrabbed = false, and WeightValue assessed.
-		- if(WeightValue >= TargetWeight){OpenDoor(DeltaTime);}
-	There will be 2 different objects: 1 heavier than TargetWeight and 1 lighter.
-	Objects will have lightsources to indicate importance (can use the inital lights I've already Created!)
-*/
