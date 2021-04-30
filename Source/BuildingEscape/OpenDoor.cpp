@@ -1,9 +1,14 @@
 // Copyright Garret Browning 2021
 
 #include "OpenDoor.h"
+#include "Components/AudioComponent.h"
+#include "Components/PrimitiveComponent.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "GameFramework/Actor.h"
+
+
+#define OUT
 
 // Sets default values for this component's properties
 UOpenDoor::UOpenDoor()
@@ -25,8 +30,6 @@ void UOpenDoor::BeginPlay()
 	{
 		UE_LOG(LogTemp, Error, TEXT("%s has the OpenDoor component on it, but no PressurePlate is set (currently set to none.)"), *GetOwner()->GetName());
 	}
-	
-	ActorThatOpens = GetWorld()->GetFirstPlayerController()->GetPawn();
 }
 
 // Called every frame
@@ -34,11 +37,10 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	if(PressurePlate && PressurePlate->IsOverlappingActor(ActorThatOpens))
+	if(TotalMassOfActors() >= MassToOpenDoors)
 	{
 		OpenDoor(DeltaTime);
-		// Door Timer
-		DoorLastOpened = GetWorld()->GetTimeSeconds();
+		DoorLastOpened = GetWorld()->GetTimeSeconds(); // Door timer.
 	}
 	else
 	{
@@ -46,17 +48,11 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 		{
 			CloseDoor(DeltaTime);
 		}
-		
 	}
 }
 
 void UOpenDoor::OpenDoor(float DeltaTime)
 {
-	// Debugging Logs:
-	// UE_LOG(LogTemp, Warning, TEXT("Actor Name ---> %s"), *GetOwner()->GetName());
-	// UE_LOG(LogTemp, Warning, TEXT("%s's Rotation ---> %s"), *GetOwner()->GetName(), *GetOwner()->GetActorRotation().ToString());
-	// UE_LOG(LogTemp, Warning, TEXT("%s's Current Yaw Value ---> %f."),  *GetOwner()->GetName(), GetOwner()->GetActorRotation().Yaw);
-	
 	CurrentRotation = GetOwner()->GetActorRotation();
 	CurrentYaw = CurrentRotation.Yaw;
 	NewRotation.Yaw = FMath::FInterpTo(CurrentYaw, OpenAngle, DeltaTime, DoorOpenSpeed);
@@ -69,4 +65,23 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 	CurrentYaw = CurrentRotation.Yaw;
 	NewRotation.Yaw = FMath::FInterpConstantTo(CurrentYaw, InitialYaw, DeltaTime, DoorCloseSpeed);
 	GetOwner()->SetActorRotation(NewRotation);
+}
+
+float UOpenDoor::TotalMassOfActors() const
+{
+	float TotalMass = 0.f;
+
+	TArray<UPrimitiveComponent*> OverlappingComponents;
+	PressurePlate->GetOverlappingComponents(OUT OverlappingComponents); // Find all overlapping actors.
+
+	// Add up all overlapping component masses:
+	if (PressurePlate)
+	{
+		for (UPrimitiveComponent* Component : OverlappingComponents)
+		{
+			TotalMass += Component->GetMass();
+		}
+	}
+	
+	return TotalMass;
 }
