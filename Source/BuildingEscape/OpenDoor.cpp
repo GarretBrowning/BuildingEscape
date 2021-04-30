@@ -26,29 +26,8 @@ void UOpenDoor::BeginPlay()
 	InitialYaw = CurrentRotation.Yaw;
 	OpenAngle += InitialYaw;
 
-	if (!PressurePlate)
-	{
-		UE_LOG(LogTemp, Error, TEXT("%s has the OpenDoor component on it, but no PressurePlate is set (currently set to none.)"), *GetOwner()->GetName());
-	}
-}
-
-// Called every frame
-void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
-{
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if(TotalMassOfActors() >= MassToOpenDoors)
-	{
-		OpenDoor(DeltaTime);
-		DoorLastOpened = GetWorld()->GetTimeSeconds(); // Door timer.
-	}
-	else
-	{
-		if (GetWorld()->GetTimeSeconds() >= DoorLastOpened + DoorCloseDelay)
-		{
-			CloseDoor(DeltaTime);
-		}
-	}
+	FindAudioComponent();
+	FindPressurePlate();
 }
 
 void UOpenDoor::OpenDoor(float DeltaTime)
@@ -57,6 +36,14 @@ void UOpenDoor::OpenDoor(float DeltaTime)
 	CurrentYaw = CurrentRotation.Yaw;
 	NewRotation.Yaw = FMath::FInterpTo(CurrentYaw, OpenAngle, DeltaTime, DoorOpenSpeed);
 	GetOwner()->SetActorRotation(NewRotation);
+
+	bCloseDoorSoundPlayed = false;
+	if(!AudioComponent){return;}
+	if(!bOpenDoorSoundPlayed)
+	{
+		AudioComponent->Play();
+		bOpenDoorSoundPlayed = true;
+	}
 }
 
 void UOpenDoor::CloseDoor(float DeltaTime)
@@ -65,6 +52,32 @@ void UOpenDoor::CloseDoor(float DeltaTime)
 	CurrentYaw = CurrentRotation.Yaw;
 	NewRotation.Yaw = FMath::FInterpConstantTo(CurrentYaw, InitialYaw, DeltaTime, DoorCloseSpeed);
 	GetOwner()->SetActorRotation(NewRotation);
+
+	bOpenDoorSoundPlayed = false;
+	if(!AudioComponent){return;}
+	if(!bCloseDoorSoundPlayed)
+	{
+		AudioComponent->Play();
+		bCloseDoorSoundPlayed = true;
+	}
+}
+
+void UOpenDoor::FindAudioComponent()
+{
+	AudioComponent = GetOwner()->FindComponentByClass<UAudioComponent>();
+
+	if (!AudioComponent)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s - Missing Audio Component!"), *GetOwner()->GetName());
+	}
+}
+
+void UOpenDoor::FindPressurePlate()
+{
+		if (!PressurePlate)
+	{
+		UE_LOG(LogTemp, Error, TEXT("%s has the OpenDoor component on it, but no PressurePlate is set (currently set to none.)"), *GetOwner()->GetName());
+	}
 }
 
 float UOpenDoor::TotalMassOfActors() const
@@ -84,4 +97,23 @@ float UOpenDoor::TotalMassOfActors() const
 	}
 	
 	return TotalMass;
+}
+
+// Called every frame
+void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	if(TotalMassOfActors() >= MassToOpenDoors)
+	{
+		OpenDoor(DeltaTime);
+		DoorLastOpened = GetWorld()->GetTimeSeconds(); // Door timer.
+	}
+	else
+	{
+		if (GetWorld()->GetTimeSeconds() >= DoorLastOpened + DoorCloseDelay)
+		{
+			CloseDoor(DeltaTime);
+		}
+	}
 }

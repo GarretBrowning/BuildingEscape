@@ -28,7 +28,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	float Reach = 130.0f;
 
+	UPROPERTY()
 	UInputComponent* GrabInputComponent = nullptr;
+	UPROPERTY()
 	UPhysicsHandleComponent* PhysicsHandle = nullptr;
 
 	void FindPhysicsHandle();
