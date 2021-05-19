@@ -250,6 +250,8 @@ I am creating mine in order to transpire the effect of the doors opening wheneve
 
 The end goal for our door is to have an object with a heavy enough mass to enter the Trigger Volume, and then trigger our Door to open.
 
+![Showing the TriggerVolume and Lighting](https://user-images.githubusercontent.com/59905099/118882495-de1f8400-b8b9-11eb-845a-9c5687b30fad.png)
+
 ### -- _DeltaTime_
 
 DeltaTime used so that speed of objects isn't determined by individual PC performance
@@ -510,5 +512,9 @@ Finding our Audio Component:
 ### **2021-05-1** -- _Finalizing BuildingEscape Tech Demo/Mockup_
 
 In terms of the overall project completion, we now have the basic building blocks of what could be flushed out into being a functional Technical Demo for a future Level Designer/Artist. They can now easily come in and create an Indian Jones type of temple escape -- or whatever they fancy!
+
+![Aerial Look on the Room](https://user-images.githubusercontent.com/59905099/118882383-c2b47900-b8b9-11eb-9d60-88b9a255b363.png)
+
+![Inside of the Room](https://user-images.githubusercontent.com/59905099/118882515-e4adfb80-b8b9-11eb-8984-ef8e78c02a05.png)
 
 For future plans and implementation, I have finished downloading and adding a free asset pack from the Unreal Store. The pack I chose was Medieval Dungeon, and I plan on working further to create my own level variant which I can finish on later on for a cleaner look compared to the current BSP demo.
