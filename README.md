@@ -2,9 +2,6 @@
 
 ###### _Developed with Unreal Engine 4_
 
-_My place to keep my journal entries that I have written along the way while learning **Unreal Engine 4**.
-Code Snippets, Links, References, and Personal Notes/Reminders._
-
 ## Resources:
 [Unreal Course](https://www.udemy.com/share/101WeuB0AYc1hXQH4=/) - Unreal Engine C++ Developer: Learn C++ and Make Video Games _(Udemy)_.
 
