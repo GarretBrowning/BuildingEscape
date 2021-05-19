@@ -62,7 +62,7 @@ Some things that I have learned throughout the video lectures as well as through
 1. Delete from file explorer. 
 1. Delete binaries.
 
-### **2021-04-23** -- _Logging in UE4_
+###-- _Logging in UE4_
 Learning today how to set my own feedback messages at run-time within Unreal so I am able debug within the future.
 
 - Format:  `UE_LOG(Category, Verbosity, TEXT("Message"));`
@@ -70,11 +70,11 @@ Learning today how to set my own feedback messages at run-time within Unreal so 
 >**Verbosity** is the colour that the log outputs to the user: 
 > - Error = Red | Warning = Yellow | Display = Grey
 
-### **2021-04-22** -- _Configuring Default Startup Level_
+###-- _Configuring Default Startup Level_
 - Default Startup Level:
 >Project Settings -> Maps & Modes -> Default Maps -> Editor Startup Map -> (Choose Level).
 
-### **2021-04-22** -- _Continuing with Pointers_
+###-- _Continuing with Pointers_
 - Pointers: `&` indicates a reference, however, it points to the variables memory address.
 - We can use `*` to dereference a pointer.
 - `.` operator takes precedence over dereferenceing. 
@@ -102,7 +102,7 @@ The L prefix makes the type of the literal `wchar_t` instead of `char`.
 
 As other platforms require different character types to handle Unicode, Unreal provides `TCHAR` type alias and the `TEXT` macro so that the right type and literal is used for the targeted platform. On Windows `TCHAR` would be wchar_t and the `TEXT` macro prepends an **L**.
 
-### **2021-04-22** -- _Getting Location for Custom **World Position** Component_
+###-- _Getting Location for Custom **World Position** Component_
 
 I have been getting more exposure to the Unreal Documentation, and have been able to use it quite efficiently.
 
@@ -111,7 +111,7 @@ We are working with FVectors and FTransforms as the main unit types for this com
 - My inital way to find our location: ```GetOwner()->GetActorTransform().GetLocation().ToString();```
 - The more efficient way I refactored to later on: ```GetOwner()->GetActorLocation().ToString();```
 
-### **2021-04-24** -- _Working with FBX Importing_
+###-- _Working with FBX Importing_
 We need something in our scene to move.
 
 Import using Content Browser -> Finished imported my own textures from [Textures.com](https://www.textures.com/library)
@@ -120,7 +120,7 @@ Import using Content Browser -> Finished imported my own textures from [Textures
 
 - Able to press F2 to rename assets, and should be able to right-click + fix up references incase there are any re-naming conflicts.
 
-### **2021-04-22** -- _Binary Space Partitioning_
+###-- _Binary Space Partitioning_
 Using Binary Space Partitioning (BSP) geometry, we are utilize and customize 3D objects to use for level design purposes.
 - Good for quickly mocking up an idea or level design.
 - There are various brushes that can be used.
@@ -140,13 +140,13 @@ In terms of collision, and other _janky_ effects from the BSPs, converting these
 - However, the model quality will suffer as it is derrived from a BSP.
   - The safest bet for model quality would be to create it from scratch within proper tools such as Blender.
 
-### **2021-04-25** -- _Lighting_
+### **2021-04-24** -- _Lighting_
 
 Dragged in some lighting effects within the the level mockup to provide the player vision, as well as, provide a sense of where the objectives lie.
 
 Used a few spotlights as simple torches to illuminate the room, as well as a point light in the corner as a main light source.
 
-### **2021-04-25** -- _Scaling Textures_
+###-- _Scaling Textures_
 
 Today I have created a texture coordinator node, as well as a scaling parameter node.
 
@@ -158,13 +158,13 @@ Created a second texture scale in and joined together using an append node.
 
 - This allows us to independently control both the **U** and **V** coordinates for our Texture/Material Instance!
 
-### **2021-04-26** -- _Creating Custom OpenDoor Actor Component_
+### **2021-04-25** -- _Creating Custom OpenDoor Actor Component_
 
 Initialized and created through UE4 an Actor Component named **`OpenDoor`**.
 
 Like the name suggest, I will be using this component to add to the existing door assets so we can control when our Door Opens/Closes.
 
-### **2021-04-27** -- _Creating Floats_
+###-- _Creating Floats_
 Creating `floats` -> implicitly converts `ints` and `doubles`
 
 - To set a float: add **f** to the end. 
@@ -174,7 +174,7 @@ Creating `floats` -> implicitly converts `ints` and `doubles`
 
 _We don't currently have an owner, typically bad to put GetOwner() in BeginPlay()._
 
-### **2021-04-28** -- _Working with Object Collision_
+###-- _Working with Object Collision_
 
 I am going to be looking through this tutorial about looking at object collision with UE4. At first I was having an issue with my actor being unable to move throughout certain points in the level, and mainly the door. It turns out the the asset for the tutorial's door frame went through the door, so I had to go into the asset editor and manually remove collision points. Whilst throughout learning in the tutorial video they gave good points about other possibile solutions:
 
@@ -189,7 +189,7 @@ So, we simply removed the collision and we can now phase through.
 
 Materials are Shader(s) plus texture(s) that determine how a mesh's surface is rendered.
 
-### **2021-04-29** -- _Linear Interpolation (Lerp)_
+### **2021-04-25** -- _Linear Interpolation (Lerp)_
 
 `FMath::Lerp(Start, End, %Distance)`
 
@@ -211,7 +211,7 @@ Another function which we can use to get the door to swing open:
 
 --> This will make quickly open and then smooth out.
 
-### **2021-04-30** -- _Working with Derrived Blueprints_
+###-- _Working with Derrived Blueprints_
 `UPROPERTY(EditAnywhere)` - This allows you to access this and set per each actor.
 
 Knowing we are able to create Blueprint properties from C++, I can tell this will be useful information to know.
@@ -242,7 +242,7 @@ Example: `UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components",
 - The _`Category`_ is what you can see in the editor window.
 - The _`meta`_ = `(AllowPrivateAccess = "true")` is how I am able to make private C++ classes visible within the editor, while still keeping them private. Keeping a mental note of this.
 
-### **2021-05-01** -- _Trigger Volumes_
+### **2021-04-26** -- _Trigger Volumes_
 Trigger Volumes:
 
 Creating a Trigger Volume and utilizing it as a set point of contact/interest for future events within the game. 
@@ -250,7 +250,7 @@ I am creating mine in order to transpire the effect of the doors opening wheneve
 
 The end goal for our door is to have an object with a heavy enough mass to enter the Trigger Volume, and then trigger our Door to open.
 
-### **2021-05-01** -- _DeltaTime_
+###-- _DeltaTime_
 
 DeltaTime used so that speed of objects isn't determined by individual PC performance
 
@@ -264,7 +264,7 @@ DeltaTime used so that speed of objects isn't determined by individual PC perfor
 
 DeltaTime is used to acquire the elapsed time between frames.
 
-### **2021-05-02** -- _Opening Door(s)_
+###-- _Opening Door(s)_
 
 Finished refactoring the opening of the door into its own separate function:
 
@@ -309,7 +309,7 @@ We now have an if statement within our `TickComponent()`function that runs `Open
   }
 ```
 
-### **2021-05-03** -- _Coding for Null Pointer Protection_
+### **2021-04-27** -- _Coding for Null Pointer Protection_
 
 I firstly created a few Log messages for Null Pointer Protection.
 
@@ -324,7 +324,7 @@ Learning more about the hierarchy of Unreal components, as I have needed to gain
 > Personal note - Pawns are a subset of Actors.
 
 
-### **2021-05-03** -- _Closing Door(s)_
+###-- _Closing Door(s)_
 Created a `CloseDoor()` function similar to `OpenDoor()` so that when off of the trigger colume, the door will automatically **revert** to previous position.
 
 ```
@@ -345,10 +345,10 @@ Created a `CloseDoor()` function similar to `OpenDoor()` so that when off of the
   }
 ```
 
-### **2021-05-03** -- _Updated Open/Close Door Functions_
+### **2021-04-28** -- _Updated Open/Close Door Functions_
 Using `GetWorld()->GetTimeSeconds()` above, I have created an `If/Else` with the World Time in Seconds related to the `DoorLastOpened` and `DoorCloseDelay` member variables that I created. I have updated the above code to show this.
 
-### **2021-04-22** -- _Game Modes_
+###-- _Game Modes_
 
 GameModes are within UE4 to set how a game should function.
 
@@ -359,13 +359,13 @@ GameModes are within UE4 to set how a game should function.
 
 All of this and more belong to GameMode.
 
-### **2021-05-04** -- _Continuing with Blueprints_
+###-- _Continuing with Blueprints_
 
 I have found that Blueprints are helpful in creating templates for assets. I have made a new Blueprint to inherit the GameMode we have created.
 
 **DefaultPawn_BP** is an asset, and we want to be able to track changes to its name (why we use blueprint instead of C++). We are able to extend the  C++ GameMode with Blueprints.
 
-### **2021-05-06** -- _Getting Players Viewpoint_
+###-- _Getting Players Viewpoint_
 I am now finding out how to find the player's viewpoint so that they are able to Ray-cast out to a certain distance (this will essentially act as our character's reach).
 
 Getting the Player's ViewPoint Location:
@@ -419,7 +419,7 @@ Going to Line Trace using [LineTraceSingleByObjectType()](https://docs.unrealeng
 
 This `bool` will return successful if an object with `PhysicsBody` collision is hit with the LineTrace.
 
-### **2021-05-07** -- _Input Binding_
+### **2021-04-29** -- _Input Binding_
 
 > **Project Settings -> Engine -> Input -> Bindings**
 
@@ -432,7 +432,7 @@ I was unable to correctly log that the input bindings were set, so I did some di
 >- Use **`.`** to access instance or reference (stack)
 > >- Intellisense -> if it's purple cube; that's a function.
 
-### **2021-05-08** -- _Refactoring TickComponent Function, and Rest of Codebase_
+###-- _Refactoring TickComponent Function, and Rest of Codebase_
 A _"hot loop"_ is code that gets called often - ex: `TickComponent`! Thus, I felt it necessary to  create separate `Grab()` and `Release()` methods so that it's not used **PER TICK** for better refactoring.
 
 I am taking my time to go through my code and remove unessescary lines of code in which I can move over to its own separate function.
@@ -455,14 +455,14 @@ Current Guidelines to Refactoring I am using:
 - Comments should be used throughout to explain _'why'_ we are doing things in a certain way.
  - The _'what'_ of what a section is doing should be obvious.
 
-### **2021-05-08** -- _Including `Components/PrimiticComponent` to `OpenDoor.cpp`_
+###_Including `Components/PrimiticComponent` to `OpenDoor.cpp`_
 Went through and included `Components/PrimitiveComponent` to the `OpenDoor.cpp`.
 This allowed me to then work on changing the initial `TriggerVolume` to open when
 the set mass (able to now be edited in UE) surpasses a certain value based on the objects placed inside (which also have their own set mass).
 
 I ran across a probelm in which the objects were not triggering inside the volume until I realized that the `Generate Overlap Events` tickbox was unticked. After enabling this setting, everything ran smoothly as expected.
 
-### **2021-05-09** -- _Adding SFX and Audio Clips_
+### **2021-04-30** -- _Adding SFX and Audio Clips_
 
 Added an audio component to door objects, which once created, allows me to either drag and drop, or select files from the drop down menu in the **Sound** section of the details pane.
 Successfully imported `door-lock.wav` file to use for the door-opening sound.
@@ -507,7 +507,7 @@ Finding our Audio Component:
   }
 ```
 
-### **2021-05-12** -- _Finalizing BuildingEscape Tech Demo/Mockup_
+### **2021-05-1** -- _Finalizing BuildingEscape Tech Demo/Mockup_
 
 In terms of the overall project completion, we now have the basic building blocks of what could be flushed out into being a functional Technical Demo for a future Level Designer/Artist. They can now easily come in and create an Indian Jones type of temple escape -- or whatever they fancy!
 
