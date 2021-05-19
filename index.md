@@ -1,4 +1,4 @@
-# Building Escape Technical Demo - Development Journal
+# Building Escape Tech Demo - Dev Journal
 
 ###### _Developed with Unreal Engine 4_
 
