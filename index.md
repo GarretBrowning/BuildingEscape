@@ -140,6 +140,8 @@ In terms of collision, and other _janky_ effects from the BSPs, converting these
 - However, the model quality will suffer as it is derrived from a BSP.
   - The safest bet for model quality would be to create it from scratch within proper tools such as Blender.
 
+![Aerial Look on the Room](https://user-images.githubusercontent.com/59905099/118882383-c2b47900-b8b9-11eb-9d60-88b9a255b363.png)
+
 ### **2021-04-24** -- _Lighting_
 
 Dragged in some lighting effects within the the level mockup to provide the player vision, as well as, provide a sense of where the objectives lie.
@@ -513,13 +515,11 @@ Finding our Audio Component:
 
 In terms of the overall project completion, we now have the basic building blocks of what could be flushed out into being a functional Technical Demo for a future Level Designer/Artist. They can now easily come in and create an Indian Jones type of temple escape -- or whatever they fancy!
 
-![Aerial Look on the Room](https://user-images.githubusercontent.com/59905099/118882383-c2b47900-b8b9-11eb-9d60-88b9a255b363.png)
-
-![Inside of the Room](https://user-images.githubusercontent.com/59905099/118882515-e4adfb80-b8b9-11eb-8984-ef8e78c02a05.png)
-
-For future plans and implementation, I have finished downloading and adding a free asset pack from the Unreal Store. The pack I chose was Medieval Dungeon, and I plan on working further to create my own level variant which I can finish on later on for a cleaner look compared to the current BSP demo.
-
 Linked Below to the YouTube Play button is a Quick Demo of the project so far:
 
 [![Quick Demo: Building Escape - (Unreal Engine 4 Dev Log)](https://user-images.githubusercontent.com/59905099/119030415-788dcf00-b96f-11eb-9427-f1842568e4cb.jpg)
 ](https://www.youtube.com/watch?v=WfLD5G_lm54&ab_channel=GarretBrowning)
+
+![Inside of the Room](https://user-images.githubusercontent.com/59905099/118882515-e4adfb80-b8b9-11eb-8984-ef8e78c02a05.png)
+
+For future plans and implementation, I have finished downloading and adding a free asset pack from the Unreal Store. The pack I chose was Medieval Dungeon, and I plan on working further to create my own level variant which I can finish on later on for a cleaner look compared to the current BSP demo.
