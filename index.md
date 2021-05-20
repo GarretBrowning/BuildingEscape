@@ -518,3 +518,8 @@ In terms of the overall project completion, we now have the basic building block
 ![Inside of the Room](https://user-images.githubusercontent.com/59905099/118882515-e4adfb80-b8b9-11eb-8984-ef8e78c02a05.png)
 
 For future plans and implementation, I have finished downloading and adding a free asset pack from the Unreal Store. The pack I chose was Medieval Dungeon, and I plan on working further to create my own level variant which I can finish on later on for a cleaner look compared to the current BSP demo.
+
+Linked Below to the YouTube Play button is a Quick Demo of the project so far:
+
+[![Quick Demo: Building Escape - (Unreal Engine 4 Dev Log)](https://user-images.githubusercontent.com/59905099/119030415-788dcf00-b96f-11eb-9427-f1842568e4cb.jpg)
+](https://www.youtube.com/watch?v=WfLD5G_lm54&ab_channel=GarretBrowning)
