@@ -16,3 +16,5 @@
 ## Learning Unreal Engine 4 - Developer Log
 
 Visit [github-pages](https://garretbrowning.github.io/BuildingEscape/) URL or Branch of this repo to access the Developer Journal.
+
+[Quick Demo Video](https://youtu.be/WfLD5G_lm54) <- showcasing the latest state of the Building Escape technical mockup.
